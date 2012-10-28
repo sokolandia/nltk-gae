@@ -1,143 +1,33 @@
-Natural Language Toolkit (NLTK)   nltk.org
+Natural Language Toolkit (NLTK) for App Engine
 ====================================
 
-NLTK -- the Natural Language Toolkit -- is a suite of open source
-Python modules, data sets and tutorials supporting research and
-development in Natural Language Processing.
+I have tampered with the NLTK in order to get it running on Google cloud platform. So far, tokenizing and Part Of Speech (POS) tagging are working.
 
-Copyright (C) 2001-2012 NLTK Project
+Quick Summary of Changes:
+-------------------------
+Changed path references to a relevant app engine path.
+Removed support for hunpos, stanford taggers due to subprocess spawning requirements in these modules
+Removed downloader module; gui not relevant on app engine.
 
-For license information, see LICENSE.txt
+Running on App Engine:
+----------------------
 
-For documentation, please visit http://nltk.org/
+Feel free to use the sample app located under appengine directory as a basis for your project. It includes the Treebank Part of Speech Tagger but not the NLTK for App Engine or PyYAML libs. In any case, the steps to running NLTK for App Engine are:
+
+1. Add following entry to the base of your app.yaml
+    libraries:
+    - name: numpy
+      version: "1.6.1"
+  
+2. Download [PyYAML](http://pyyaml.org/download/pyyaml/) and copy it's lib directory to your project root.
+
+3. Copy NLTK for App Engine to your project root. import nltk and play on.
+
+Sample Code:
+-----------
+
+Sample App Engine app utilising above method(s) located under appengine directory
 
 Redistributing
 ----------------------
-NLTK source code is distributed under the Apache 2.0 License.  
-NLTK documentation is distributed under the Creative Commons Attribution-Noncommercial-No Derivative Works 3.0 United States license.  
-NLTK corpora are provided under the terms given in the README file for each corpus; all are redistributable, and available for non-commercial use.  
-NLTK may be freely redistributed, subject to the provisions of these licenses.  
-
-Contributing
-------------------
-If you would like to contribute to NLTK, please post your ideas to [nltk-dev](http://groups.google.com/group/nltk-dev), or [fork nltk on github](https://github.com/nltk/nltk).
-
-The following people have contributed to NLTK:
-
-Rami Al-Rfou',
-Greg Aumann,
-Yonatan Becker,
-Paul Bedaride,
-Steven Bethard,
-Robert Berwick,
-Dan Blanchard,
-Nathan Bodenstab,
-Francis Bond,
-Paul Bone,
-Jordan Boyd-Graber,
-Daniel Blanchard,
-Phil Blunsom,
-Lars Buitinck,
-Steve Cassidy,
-Chen-Fu Chiang,
-Dmitry Chichkov,
-Jinyoung Choi,
-Andrew Clausen,
-Lucas Champollion,
-Trevor Cohn,
-David Coles,
-Lucas Cooper,
-Robin Cooper,
-Chris Crowner,
-James Curran,
-Dariel Dato-on,
-Selina Dennis,
-Leon Derczynski,
-Alexis Dimitriadis,
-Nikhil Dinesh,
-Liang Dong,
-David Doukhan,
-Rebecca Dridan,
-Pablo Duboue,
-Christian Federmann,
-Dan Garrette,
-Jean Mark Gawron,
-Sumukh Ghodke,
-Yoav Goldberg,
-Brent Gray,
-Simon Greenhill,
-Eduardo Pereira Habkost,
-Masato Hagiwara,
-Michael Hansen,
-Yurie Hara,
-Will Hardy,
-Peter Hawkins,
-Michael Heilman,
-Amy Holland,
-Kristy Hollingshead,
-Baden Hughes,
-Rebecca Ingram,
-Edward Ivanovic,
-Thomas Jakobsen,
-Piotr Kasprzyk,
-Sudharshan Kaushik,
-Chris Koenig,
-Mikhail Korobov,
-Stefano Lattarini,
-Pierre-François Laquerre,
-Stefano Lattarini,
-Haejoong Lee,
-Max Leonov,
-Tom Lippincott,
-Peter Ljunglöf,
-Nitin Madnani,
-Bjørn Mæland,
-Christopher Maloof,
-Rob Malouf,
-Iker Manterola,
-Carl de Marcken,
-Mitch Marcus,
-Torsten Marek,
-Robert Marshall,
-Duncan McGreggor,
-Xinfan Meng,
-Margaret Mitchell,
-Tomonori Nagano,
-Jason Narad,
-Morten Neergaard,
-David Nemeskey,
-Eric Nichols,
-Joel Nothman,
-Jacob Perkins,
-Alberto Planas,
-Alessandro Presta,
-Martin Thorsen Ranang,
-Brandon Rhodes,
-Joshua Ritterman,
-Stuart Robinson,
-Carlos Rodriguez,
-Alex Rudnick,
-Jussi Salmela,
-Geoffrey Sampson,
-Kepa Sarasola,
-Kevin Scannell,
-Nathan Schneider,
-Rico Sennrich,
-Thomas Skardal,
-Eric Smith,
-Rob Speer,
-Peter Spiller,
-Richard Sproat,
-Ceri Stagg,
-Peter Stahl,
-Oliver Steele,
-Jan Strunk,
-Claire Taylor,
-Steven Tomcavage,
-Tiago Tresoldi,
-Petro Verkhogliad,
-Peter Wang,
-Charlotte Wilson,
-Beracah Yankama,
-Patrick Ye,
-Jason Yoder.
+NLTK for App Engine source code is distributed under the same license as the [NLTK project](http:nltk.org), that is the Apache 2.0 License. 
