@@ -51,6 +51,7 @@ We evaluate a tagger on data that was not seen during training:
 
 For more information, please consult chapter 5 of the NLTK Book.
 """
+import os
 
 from nltk.tag.api        import TaggerI
 from nltk.tag.util       import str2tuple, tuple2str, untag
@@ -64,8 +65,6 @@ from nltk.tag.sequential import (SequentialBackoffTagger, ContextTagger,
                                  ClassifierBasedPOSTagger)
 from nltk.tag.brill      import BrillTagger, BrillTaggerTrainer, FastBrillTaggerTrainer
 from nltk.tag.tnt        import TnT
-from nltk.tag.hunpos     import HunposTagger
-from nltk.tag.stanford   import StanfordTagger
 from nltk.tag.crf        import MalletCRF
 
 from nltk.data      import load

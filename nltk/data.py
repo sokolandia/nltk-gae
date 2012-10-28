@@ -31,7 +31,6 @@ adds it to a resource cache; and ``retrieve()`` copies a given resource
 to a local file.
 """
 
-from __future__ import print_function
 import sys
 import os, os.path
 import textwrap
@@ -71,24 +70,8 @@ path = []
    substitute in their own versions of resources, if they have them
    (e.g., in their home directory under ~/nltk_data)."""
 
-# User-specified locations:
-path += [d for d in os.environ.get('NLTK_DATA', '').split(os.pathsep) if d]
-if os.path.expanduser('~/') != '~/': path += [
-    os.path.expanduser('~/nltk_data')]
-
-# Common locations on Windows:
-if sys.platform.startswith('win'): path += [
-    r'C:\nltk_data', r'D:\nltk_data', r'E:\nltk_data',
-    os.path.join(sys.prefix, 'nltk_data'),
-    os.path.join(sys.prefix, 'lib', 'nltk_data'),
-    os.path.join(os.environ.get('APPDATA', 'C:\\'), 'nltk_data')]
-
-# Common locations on UNIX & OS X:
-else: path += [
-    '/usr/share/nltk_data',
-    '/usr/local/share/nltk_data',
-    '/usr/lib/nltk_data',
-    '/usr/local/lib/nltk_data']
+gae_path = os.path.split(__file__)[0]
+path += [gae_path[0:gae_path.rfind('/')]]
 
 ######################################################################
 # Path Pointers
@@ -485,10 +468,10 @@ def retrieve(resource_url, filename=None, verbose=True):
             filename = re.sub(r'(^\w+:)?.*/', '', resource_url)
     if os.path.exists(filename):
         filename = os.path.abspath(filename)
-        raise ValueError("File %r already exists!" % filename)
+        raise ValueError, "File %r already exists!" % filename
 
     if verbose:
-        print('Retrieving %r, saving to %r' % (resource_url, filename))
+        print 'Retrieving %r, saving to %r' % (resource_url, filename)
 
     # Open the input & output streams.
     infile = _open(resource_url)
@@ -509,6 +492,7 @@ def retrieve(resource_url, filename=None, verbose=True):
 #: descriptions.
 FORMATS = {
     'pickle': "A serialized python object, stored using the pickle module.",
+	'pickle_file': "pickled file object",
     'yaml': "A serialized python object, stored using the yaml module.",
     'cfg': "A context free grammar, parsed by nltk.parse_cfg().",
     'pcfg': "A probabilistic CFG, parsed by nltk.parse_pcfg().",
@@ -581,12 +565,12 @@ def load(resource_url, format='auto', cache=True, verbose=False,
         resource_val = _resource_cache.get(resource_url)
         if resource_val is not None:
             if verbose:
-                print('<<Using cached copy of %s>>' % (resource_url,))
+                print '<<Using cached copy of %s>>' % (resource_url,)
             return resource_val
 
     # Let the user know what's going on.
     if verbose:
-        print('<<Loading %s>>' % (resource_url,))
+        print '<<Loading %s>>' % (resource_url,)
 
     # Determine the format of the resource.
     if format == 'auto':
@@ -604,6 +588,8 @@ def load(resource_url, format='auto', cache=True, verbose=False,
     # Load the resource.
     if format == 'pickle':
         resource_val = pickle.load(_open(resource_url))
+    elif format == 'pickle_file':
+        resource_val = pickle.load(resource_url)
     elif format == 'yaml':
         import yaml
         resource_val = yaml.load(_open(resource_url))
@@ -656,7 +642,7 @@ def show_cfg(resource_url, escape='##'):
     for l in lines:
         if l.startswith(escape): continue
         if re.match('^$', l): continue
-        print(l)
+        print l
 
 
 def clear_cache():
@@ -1139,7 +1125,7 @@ class SeekableUnicodeStreamReader(object):
         while True:
             try:
                 return self.decode(bytes, 'strict')
-            except UnicodeDecodeError as exc:
+            except UnicodeDecodeError, exc:
                 # If the exception occurs at the end of the string,
                 # then assume that it's a truncation error.
                 if exc.end == len(bytes):

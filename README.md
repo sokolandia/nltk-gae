@@ -22,6 +22,7 @@ libraries:
 - name: numpy
   version: "1.6.1"
 ```
+
 2. Download [PyYAML](http://pyyaml.org/download/pyyaml/) and copy it's lib directory to your project root.
 
 3. Copy NLTK for App Engine to your project root. import nltk and play on.
