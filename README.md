@@ -17,7 +17,7 @@ It includes the Treebank Part of Speech Tagger but not the NLTK for App Engine o
 In any case, the steps to running NLTK for App Engine are:
 
 1. Add following entry to the base of your app.yaml
-```yaml
+```
 libraries:
 - name: numpy
   version: "1.6.1"
