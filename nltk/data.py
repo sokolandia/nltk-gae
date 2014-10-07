@@ -73,6 +73,9 @@ path = []
 gae_path = os.path.split(__file__)[0]
 path += [gae_path[0:gae_path.rfind('/')]]
 
+# Add paths defined in NLTK_DATA environment variable
+path += [d for d in os.environ.get('NLTK_DATA', str('')).split(os.pathsep) if d]
+
 ######################################################################
 # Path Pointers
 ######################################################################
